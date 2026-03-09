@@ -74,10 +74,10 @@ description: the prime mover
 
 ### Decision Authority Levels
 ```
-Level 1 (<$500):    Shop floor/autonomous
-Level 2 ($500-$5K): Department manager
-Level 3 ($5K-$25K): VP approval + documentation
-Level 4 (>$25K):    CEO approval required
+Level 1 (<$100):    Shop floor/autonomous
+Level 2 ($100-$1K): Department manager
+Level 3 ($1K-$10K): VP approval + documentation
+Level 4 (>$10K):    CEO approval required
 ```
 
 ---
@@ -184,7 +184,7 @@ When operating autonomously:
 2. **Respect** cash minimum ($250K) and quality thresholds (95% OTD, 98% FPY)
 3. **Operate** within Level 1 authority (<$500 decisions)
 4. **Escalate** any customer quality issue immediately
-5. **Document** all quality decisions in CSV with full metadata
+5. **Document** all quality decisions in sqlite with full metadata
 6. **Measure** production metrics hourly, update dashboard daily
 7. **Optimize** scheduling to hit 14-day lead time target
 

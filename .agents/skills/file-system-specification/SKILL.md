@@ -52,14 +52,14 @@ All core Toyota Production System concepts map naturally to taxonomy locations w
 
 The taxonomy consists of a process root, three levels and a standard data system:
 
-| Level | Description         | Count      | Mutability |
-|-------|---------------------|------------|------------|
-| 0     | Process Root        | 1          | Immutable  |
-| 1     | Streams             | 4          | Immutable  |
-| 2     | Universal Functions | 12         | Immutable  |
-| 3     | Process Areas       | 65         | Immutable  |
-| 4     | Data System         | 5 per area | Immutable  |
-| 5     | ASDF Systems        | as needed  | Mutable    |
+| Level | Description         | Count              | Mutability |
+|-------|---------------------|--------------------|------------|
+| 0     | Process Root        | 1                  | Immutable  |
+| 1     | Streams             | 4                  | Immutable  |
+| 2     | Universal Functions | 12                 | Immutable  |
+| 3     | Process Areas       | 65                 | Immutable  |
+| 4     | Data System         | 5 per process area | Immutable  |
+| 5     | ASDF Systems        | create as needed   | Mutable    |
 
 ### 2.2 Level 1: Business Streams
 
@@ -173,7 +173,11 @@ Infrastructure processes ensure the physical and digital environment supports op
 Specific process areas providing comprehensive coverage:
 
 ```
+
 business/
+│
+├── binary-artefacts-store/
+│
 ├── coordination/
 │   ├── governance/
 │   │   ├── strategy/
@@ -275,8 +279,7 @@ Every Level 3 process area contains exactly five subdirectories:
 ```
 
 Each directory of asdf systems can contain any number of asdf systems.
-Each system will pertain to the process and data type which is described by the path to the system.
-this data-system-specification is described in detail elsewhere.
+Each system will pertain to the process and data type which is described by the path to the system. The data system and system naming is described in detail in the data-system-specification.
 
 ## 3. Process Area Definitions
 
@@ -711,30 +714,31 @@ Waste elimination is distributed throughout the taxonomy:
 
 ### 5.1 Naming Conventions
 
-Since Levels 1-3 are immutable, specificity is achieved through descriptive file and system names below Level 4.
+Since Levels 0-4 are immutable, specificity is achieved through descriptive system, package and file names below Level 4.
 Descriptive naming is described in detail in data-system-specification
 
 ### 5.2 Cross-Process References
 
 Many initiatives span multiple process areas.
 Loading asdf systems into the lisp image will facilitate this.
-Document cross-process interactions using cross cutting concerns
+Document cross-process relationships using time-stamped metadata comments.
+Control cross-process interactions using cross cutting concerns.
 
 ### 5.3 Executive Directive Interpretation and Integration
 
 The interpreted-executive-directive process area serves as the integration point:
 1. Executive directives reside in the executive-directive skill
-2. Interpretation and mapping documents in same location
-3. Each affected process area refers to interpreted executive directives explaining relevance
-4. Compliance tracking occurs in interpreted-executive-directive area
 5. Periodic review and reinterpretation ensures alignment
+2. The interpreted-executive-directive holds the interpretation, process mapping and documents in same location
+3. Each affected process area refers back to interpreted executive directives explaining relevance
+4. Compliance tracking occurs in interpreted-executive-directive area
 
 ### 5.4 Industry Adaptation
 
 The taxonomy remains constant across industries; adaptation occurs through:
 
 - **Level 3 interpretation**: What "production" means varies by industry
-- **File naming**: Industry-specific terminology in file names
+- **Naming**: Industry-specific terminology in system, package and file names
 - **System implementation**: Industry-specific code procedures and knowledge in asdf systems
 
 ## 6. Specification Conformance
@@ -743,20 +747,20 @@ The taxonomy remains constant across industries; adaptation occurs through:
 
 Implementations SHALL:
 
-1. Maintain exactly the four-level structure defined in Section 2
+1. Maintain exactly the multi level structure defined in Section 2
 2. Use exactly the process areas defined in Section 2
 3. Implement exactly the subdirectories at Level 4 as defined in Section 2.5 and in the data-system-specification
-4. Treat Levels 1-3 as immutable
-5. Use self-documenting asdf syste names and file names as documented in data-system-specification
+4. Treat Levels 0-4 as immutable
+5. Use self-documenting asdf system names, package names and file names as documented in data-system-specification
 
 ### 6.2 Optional Extensions
 
 Implementations MAY:
 
-1. Add metadata via dated comments within code files ;; (<YYYY-MM-DD> tags:<> etc)
-1. Add metadata via dated comments within code files ;; <YYYY-MM-DD> description of why something has been done
+1. Add internal metadata via dated comments within code files ;; (<YYYY-MM-DD> tags:<> etc)
+1. Add internal metadata via dated comments within code files ;; <YYYY-MM-DD> description of why something has been done
 3. Implement additional tooling for taxonomy navigation
-4. Add version control systems
+4. Implement version control systems
 5. Implement automated compliance checking
 
 ### 6.3 Prohibited Modifications
@@ -764,7 +768,7 @@ Implementations MAY:
 Implementations SHALL NOT:
 
 1. Create additional taxonomy levels beyond Level 3
-2. Modify or rename Level 1-3 categories
+2. Modify or rename Level 0-3 categories
 3. Add or remove Level 4 subdirectories
 4. Restructure the hierarchy
 5. Create alternative parallel taxonomies
@@ -779,9 +783,10 @@ Parse the directive into objectives, constraints, values, methods, and affected 
 Map each to relevant third-level process areas
 Create or update systems in interpreted-executive-directive
 Identify cross-process dependencies and document them
-Generate initial metrics to track progress
-Assess and modify existing asdf systems only if appropriate
-Create asdf systems as needed
+Generate metrics to track progress
+Assess existing asdf systems
+Modify existing asdf systems only if appropriate
+Create additional asdf systems only if needed
 Create tests to ensure processes and software are aligned and correct
 Assess and modify existing asdf systems to harmonize them with the system
 Assess the alignment and effectiveness and harmony of the overall system
@@ -791,12 +796,12 @@ Review the executive-directive
 
 Agents should regularly:
 
-Re-read coordination/governance/directive/
-Verify that populated process areas still align with directive intent
+Re-read executive-directive and coordination/governance/interpreted-executive-directive/
+Verify that populated process areas still align with intent
 Check for new directive implications not yet captured
 Audit metrics for accuracy and relevance
-Audit knowledge base (LISA SCREAMER) for accuracy and relevance
-Consolidate or refactor code/rules as understanding evolves
+Audit knowledge base (LISA and SCREAMER) for accuracy and relevance
+Consolidate or refactor code and rules as understanding evolves
 Update documentation to reflect current state
 
 ### Filesystem Navigation
@@ -809,10 +814,10 @@ Data Type (which representation?)
 
 Example: "Where should I put manufacturing defect tracking?"
 
-Stream: value-stream (it's about product creation)
-Function: fulfillment (it's about production)
-Process Area: quality-assurance (it's about defects)
-Data Type: sqlite-asdf-systems/defect-tracking.asd (defines system which exports pertinent packages, symbols and functions)
+Stream: value-stream/ (it's about product creation)
+Function: fulfillment/ (it's about production)
+Process Area: quality-assurance/ (it's about defects)
+Data Type: sqlite-asdf-systems/defect-tracking.asd (this system defines and exports pertinent packages, symbols and functions)
 
 ## 8. Appendices
 

@@ -1,12 +1,12 @@
 ---
 name: data-system-specification
-description: specifies the data representation system and properties. use this to understand how to categorize and place: procedures and knowledge as asdf systems
+description: specifies the data representation system and properties. use this to understand how to categorize and place procedures and knowledge as asdf systems
 ---
 
 # overview
 
 5 distinct epistemic data types to represent knowledge and processes
-these are all-together contained under leaf directories of the process ontology file system described elsewhere
+these are all-together contained under leaf directories of the process taxonomic file system described in file-system-specification
 
 # Leaf Node Specification
 
@@ -17,12 +17,12 @@ these are all-together contained under leaf directories of the process ontology 
 ## Context
 
 This document specifies the contents of a leaf node within a
-hierarchical, self-describing process ontology. The ontology is
+hierarchical, self-describing process taxonomy. The taxonomy is
 three levels deep. Each level narrows the domain of concern until a leaf
 is reached, at which point all executable, nonderministic knowledge,
 declarative knowledge, data, and artifact references are held.
 
-The canonical ontology root and the leaves addressed by this document:
+The canonical taxonomy root and the leaves addressed by this document:
 
     business/
       coordination/
@@ -47,7 +47,7 @@ All knowledge, code, data, and references reside exclusively at the leaves.
 ## 2.1 Self-Description
 
 Every artefact — directory, ASDF system, source file, data file —
-carries its full ontological address in its name. An agent inspecting
+carries its full taxonomic address in its name. An agent inspecting
 the filesystem or a running Lisp image can determine the domain,
 subdomain, process, epistemic category, system identity, and package
 identity of any resource from its name alone. No registry or external
@@ -62,7 +62,7 @@ Parent directories contain an ASDF system that depend on the ASDF system of the 
 ## 2.3 Image Navigability
 
 Package names mirror the filesystem path using dot-separated segments. A
-running Lisp image is therefore a faithful projection of the ontology.
+running Lisp image is therefore a faithful projection of the taxonomy.
 Any package in the image points back unambiguously to its leaf, its
 epistemic category, its ASDF system, and its source file.
 
@@ -95,7 +95,7 @@ The naming patterns for ASDF systems at a node is:
 
 The full naming pattern for any ASDF system at a leaf is:
 
-    <root>.<level-1>.<level-2>.<leaf>.<category>.<system-name>
+    <root>.<level-1>.<level-2>.<leaf>.<category>.<system-name>.asd
 
 For a source file within that system:
 
@@ -103,6 +103,7 @@ For a source file within that system:
 
 Concrete example for the risk leaf:
 
+    business.coordination.governance.risk.lisa-asdf-systems.regulatory-risk-facts/
     business.coordination.governance.risk.lisa-asdf-systems.regulatory-risk-facts.asd
     business.coordination.governance.risk.lisa-asdf-systems.regulatory-risk-facts.schema.lisp
     business.coordination.governance.risk.lisa-asdf-systems.regulatory-risk-facts.inference-rules.lisp
@@ -155,13 +156,16 @@ The category segment encodes which of the five directories the system belongs to
             └── src/
                 └── business.coordination.governance.risk.lisa-binary-reference-asdf-systems.risk-document-artifacts.references.lisp
 
-The binary artifacts store sits outside the ontology proper at the root:
+The binary artifacts store is outside the taxonomy proper but its path is located at the root:
 
-    binary-artifacts-store/
-      a3/
-        a3f9c8b2d1e47f3a...   <- hash-addressed blob
-      7f/
-        7fb2341acd9e...
+    business/binary-artifacts-store/
+    │
+    ├── a3/
+    │   └── a3f9c8b2d1e47f3a.../ <- hash-addressed blob
+    │
+    └── 7f/
+        └── 7fb2341acd9e.../
+
 
 # 5. Directory Descriptions
 
@@ -172,8 +176,9 @@ The binary artifacts store sits outside the ontology proper at the root:
 Contains one or more ASDF systems implementing the executable logic of
 the leaf process. Systems here answer the question of how the process
 operates: what computations it performs, what transformations it
-applies, what outputs it produces. Screamer is not used here;
+applies, what outputs it produces. LISA and Screamer are not used here;
 nondeterminacy and constraint reasoning are categorically separated.
+Coalton can be used here to enforce correctness in late stage refinements.
 
 ## 5.2 screamer-asdf-systems/
 
@@ -202,15 +207,14 @@ initialised.
 
 *Epistemic role: tabular observations, records, and reference data.*
 
-Contains ASDF systems which refer to sqlite files holding structured data:
-registers, thresholds, reference tables, historical records, temporal data,
+Contains ASDF systems which refer to sqlite files holding structured data: observations, relatinships, data, registers, thresholds, reference tables, historical records, temporal data,
 configuration tables. Sqlite is used because it is universally readable
 without simple tooling, trivially loadable into any in-memory structure, and
 fully inspectable. Files carry the full leaf prefix in their names.
 
 ## 5.5 lisa-binary-reference-asdf-systems/
 
-*Epistemic role: referential pointers to physical binary artifacts.*
+*Epistemic role: referential pointers to discrete binary artifacts.*
 
 Contains ASDF systems whose sole purpose is to assert LISA facts that
 describe and locate binary artifacts held in the top-level
@@ -273,10 +277,10 @@ An agent or human can open any sqlite file and understand the contents by inspec
 # 7. Image Navigability and Back-Reference
 
 When all systems at a leaf are loaded, by loading the node asdf system into a running Common Lisp image,
-the package namespace encodes the full ontological provenance of every
+the package namespace encodes the full taxonomic provenance of every
 definition. The following properties hold:
 
-- An agent can call `list-all-packages` and group results by ontological
+- An agent can call `list-all-packages` and group results by taxonomic
   address, reconstructing a map of which leaves and nodes are loaded and which are
   not.
 
@@ -290,8 +294,8 @@ definition. The following properties hold:
   category subdirectories.
 
 No registry, manifest, or index is required. The package namespace is
-the index. The ontology is fully recoverable from the image, and the
-image is fully traceable to the ontology.
+the index. The taxonomy is fully recoverable from the image, and the
+image is fully traceable to the taxonomy.
 
 # 8. Agent Loading Protocol
 

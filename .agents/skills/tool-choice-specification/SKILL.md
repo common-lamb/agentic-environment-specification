@@ -9,25 +9,25 @@ this is the list to consult when choosing software and selecting among asdf syst
 
 # specification
 
-functional programming patterns are preferred but not enforced
+functional programming patterns are preferred but not mandatory
 where critical correctness is required, use coalton for typechecking
 
-we use ocicl to obtain asdf systems from the list: https://raw.githubusercontent.com/ocicl/request-system-additions-here/main/all-ocicl-systems.txt
-for dependencies which CL cannot provide, conda is available, but this is strongly discouraged in favour of an integrated CL system.
-
-
+we use ocicl to obtain asdf systems from the internet
+see this list for availability: https://raw.githubusercontent.com/ocicl/request-system-additions-here/main/all-ocicl-systems.txt
 
 # common lisp systems
 
-design process : https://github.com/nathanodle/spark
+common lisp model context protocol: https://github.com/cl-ai-project/cl-mcp
+editor: https://github.com/lem-project/lem
+lem model context protocol: built in
 
 build system: https://common-lisp.net/project/asdf/
 software distribution: https://github.com/ocicl/ocicl
 tests: https://github.com/melisgl/try
 documentation: https://github.com/melisgl/mgl-pax
-database manipulation: https://github.com/fukamachi/cl-dbi
+database interaction: https://github.com/fukamachi/cl-dbi
 forward chaining expert system: https://github.com/youngde811/Lisa
-non determinism: https://github.com/nikodemus/screamer
+non deterministic programming: https://github.com/nikodemus/screamer
 asdf templates: https://github.com/fukamachi/cl-project
 repl introspection: https://github.com/m-n/repl-utilities
 
@@ -35,12 +35,8 @@ stats and visualization: https://github.com/lisp-stat
 machine learning: https://github.com/melisgl/mgl
 matrix math: https://github.com/quil-lang/magicl
 
-common lisp model context protocol: https://github.com/cl-ai-project/cl-mcp
-editor: https://github.com/lem-project/lem
-lem model context protocol: built in
-
-static types: https://github.com/coalton-lang/coalton/
-parellel processing: https://github.com/sharplispers/lparallel
+algebraic data types: https://github.com/coalton-lang/coalton/
+parallel processing: https://github.com/sharplispers/lparallel
 memoization: https://github.com/AccelerationNet/function-cache
 data transformation: https://github.com/fosskers/cl-transducers/
 data structures: https://common-lisp.net/project/fset
@@ -74,6 +70,7 @@ where not specified, choose mainstream common lisp systems with good documentati
 
 # non common lisp packages
 
+design process inspiration: https://github.com/nathanodle/spark
 database: sqlite
 tunneling: cloudflare
 networking: tailscale / headscale
