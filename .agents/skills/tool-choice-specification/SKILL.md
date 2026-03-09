@@ -54,6 +54,7 @@ strings: https://github.com/vindarel/cl-str
 websites: https://github.com/rabbibotton/clog
 css styling: https://codeberg.org/shinmera/LASS
 http client: https://github.com/fukamachi/dexador
+payment: https://github.com/boogsbunny/stripe
 
 machine introspection: https://codeberg.org/shinmera/machine-state/
 logging: https://github.com/sharplispers/log4cl/
@@ -76,3 +77,4 @@ tunneling: cloudflare
 networking: tailscale / headscale
 encryption: age
 containers: podman
+payment: stripe
