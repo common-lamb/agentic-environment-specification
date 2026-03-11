@@ -137,7 +137,9 @@ After directive implementation, enter an operations and maintenance posture:
 - **Operations**: handle any tasks, communications or activities which require oversight
 - **Directive re-interpretation**: re-read `executive-directive` to detect updated objectives. Treat any change as a new development cycle entry point.
 - **Taxonomy integrity**: ensure parent ASDF systems remain consistent with their children. If a child is added, modified or renamed, update the parent immediately.
-- **No silent failures**: if a system fails to load or produces unexpected results, halt, diagnose, and resolve, then write tests to enforce the solution, before continuing the loop.
+- **Documentation Clarity**: document strings for functions and tests clearly and correctly state: ARGUMENTS: DOES: RETURNS: explicitly check that the docs match the code. Comments state why something happens, code says what happens.
+- **Attend to silent failures**: Every time a system fails to load or does not produce expected results (negative error); halt, diagnose, and resolve, then write tests to enforce the solution, before continuing the loop.
+- **Test driven debugging**: Every time a bug or bad output is encountered (positive error); write a test to reproduce the problem. Then resolve the problem and prove it is solved with the passing test, before continuing the loop.
 
 ---
 
